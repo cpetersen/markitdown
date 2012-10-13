@@ -25,8 +25,10 @@ module Html
       when "style"
         return []
       when "div"
+        results << " "
         after = " "
       when "span"
+        results << " "
         after = " "
       when "p"
         results << self.newline(pre, nil, 2)
