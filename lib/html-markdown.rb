@@ -12,10 +12,11 @@ module Html
     end
 
     private
-    def self.parse_node(node, state=[])
+    def self.parse_node(node, states=[])
       results=[]
       after = nil
-      state.unshift node.name.downcase
+      states.unshift node.name.downcase
+      pre = prefix(states)
       case node.name
       when "head"
         return []
@@ -28,30 +29,38 @@ module Html
       when "span"
         after = " "
       when "p"
-        results << "\n\n"
-        after = "\n\n"
+        results << self.newline(pre, nil, 2)
+        after = self.newline(pre, nil,  2)
       when "h1"
-        results << "\n\n# "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "# "
+        after = self.newline(pre, nil,  2)
       when "h2"
-        results << "\n\n## "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "## "
+        after = self.newline(pre, nil,  2)
       when "h3"
-        results << "\n\n### "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "### "
+        after = self.newline(pre, nil,  2)
       when "h4"
-        results << "\n\n#### "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "#### "
+        after = self.newline(pre, nil,  2)
       when "h5"
-        results << "\n\n##### "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "##### "
+        after = self.newline(pre, nil,  2)
       when "h6"
-        results << "\n\n###### "
-        after = "\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "###### "
+        after = self.newline(pre, nil,  2)
       when "hr"
-        results << "\n\n***\n\n"
+        results << self.newline(pre, nil,  2)
+        results << "***"
+        results << self.newline(pre, nil,  2)
       when "br"
-        results << "\n\n"
+        results << self.newline(pre, nil,  2)
       when "em"
         results << " *"
         after = "* "
@@ -64,16 +73,21 @@ module Html
       when "b"
         results << " **"
         after = "** "
+      when "blockquote"
+        results << pre
+        after = "\n"
       when "ol"
-        results << "\n\n"
-      when "ul"
-        results << "\n\n"
-      when "li"
-        if self.ordered_list?(state)
-          results << " 1. "
-        else
-          results << " * "
+        results << self.newline(pre, nil)
+        unless self.nested_list?(states)
+          results << self.newline(pre, nil)
         end
+      when "ul"
+        results << self.newline(pre, nil)
+        unless self.nested_list?(states)
+          results << self.newline(pre, nil)
+        end
+      when "li"
+        results << pre
         after = "\n"
       when "a"
         results << " ["
@@ -85,18 +99,60 @@ module Html
         results << node.attributes["src"].value if node.attributes["src"]
         results << ") "
       when "text"
-        results << node.text.strip
+        results << node.text.strip.gsub("\n","").gsub(/ {2,}/," ")
       end
       node.children.each do |child|
-        results << self.parse_node(child, state)
+        results << self.parse_node(child, states)
       end
       results << after
-      state.shift
+      states.shift
       results
     end
 
-    def self.ordered_list?(state)
-      state[1] == "ol"
+    def self.nested_list?(states)
+      result = false
+      states.each_with_index do |state, index|
+        next if [0,1].include?(index)
+        result = true if ["ul","ol","blockquote"].include?(state)
+      end
+      result
+    end
+
+    def self.newline(pre, line, count=1)
+      result = []
+      count.times do
+        result << pre
+        result << line
+        result << "\n"
+      end
+      result
+    end
+
+    def self.prefix(states)
+      result = []
+      states.each_with_index do |state, index|
+        if state == "blockquote"
+          result.unshift(" > ")
+        end          
+        next if index==0
+        if index==1
+          if states.first == "li"
+            if state == "ol"
+              result.unshift(" 1. ")
+            elsif state == "ul"
+              result.unshift(" * ")
+            end
+          end
+          next
+        end
+        case state
+        when "ol"
+          result.unshift("   ")
+        when "ul"
+          result.unshift("  ")
+        end
+      end
+      result
     end
   end
 end

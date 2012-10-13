@@ -188,8 +188,22 @@ describe Html::Markdown do
   end
 
   context "When parsing a blockquote" do
+    let(:html) { "<blockquote>this is a block quote</blockquote>" }
+    
     it "should return valid markdown" do
-      pending
+      Html::Markdown.html_to_markdown(html).should == " > this is a block quote\n"
+    end
+  end
+
+  context "When parsing a multi line blockquote" do
+    let(:html) { "<blockquote>
+      line 1
+      line 2
+      line 3
+    </blockquote>" }
+    
+    it "should return valid markdown" do
+      Html::Markdown.html_to_markdown(html).should == " > line 1 line 2 line 3\n"
     end
   end
 end
