@@ -8,7 +8,7 @@ module Html
     end
 
     def self.node_to_markdown(node)
-      self.parse_node(node).flatten.compact.join.gsub(/\n{2,}/,"\n\n").gsub(/ ([\.\?])/,'\1')
+      self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/ ([\.\?])/,'\1')
     end
 
     private
