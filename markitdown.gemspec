@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/html-markdown/version', __FILE__)
+require File.expand_path('../lib/markitdown/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Christopher Petersen"]
@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "html-markdown"
+  gem.name          = "markitdown"
   gem.require_paths = ["lib"]
-  gem.version       = Html::Markdown::VERSION
+  gem.version       = MarkitDown::VERSION
 end

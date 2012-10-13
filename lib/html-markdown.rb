@@ -1,4 +1,4 @@
-require "html-markdown/version"
+require "markitdown/version"
 require "nokogiri"
 
 module Html
