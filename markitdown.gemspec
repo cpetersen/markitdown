@@ -17,5 +17,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "markitdown"
   gem.require_paths = ["lib"]
-  gem.version       = MarkitDown::VERSION
+  gem.version       = Markitdown::VERSION
 end

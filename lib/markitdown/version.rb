@@ -1,5 +1,3 @@
-module Html
-  module Markdown
-    VERSION = "0.0.1"
-  end
+module Markitdown
+  VERSION = "0.0.1"
 end

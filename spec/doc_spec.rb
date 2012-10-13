@@ -1,11 +1,11 @@
 require 'markitdown'
 
-describe MarkitDown do  
+describe Markitdown do  
   context "When parsing a document" do
     let(:html) { File.read("spec/doc.html") }
 
     it "should produce valid markdown" do
-      MarkitDown.html_to_markdown(html).should == "
+      Markitdown.html_to_markdown(html).should == "
 
 # Main Header
 
