@@ -77,18 +77,18 @@ module Html
         results << pre
         after = "\n"
       when "ol"
-        results << self.newline(pre, nil)
         unless self.nested_list?(states)
           results << self.newline(pre, nil)
+          after = "\n"
         end
       when "ul"
-        results << self.newline(pre, nil)
         unless self.nested_list?(states)
           results << self.newline(pre, nil)
+          after = "\n"
         end
       when "li"
+        results << "\n"
         results << pre
-        after = "\n"
       when "a"
         results << " ["
         after = ["](#{node.attributes["href"].value}) "]
@@ -112,7 +112,7 @@ module Html
     def self.nested_list?(states)
       result = false
       states.each_with_index do |state, index|
-        next if [0,1].include?(index)
+        next if index==0
         result = true if ["ul","ol","blockquote"].include?(state)
       end
       result
