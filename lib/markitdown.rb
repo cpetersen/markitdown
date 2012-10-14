@@ -7,7 +7,7 @@ module Markitdown
   end
 
   def self.node_to_markdown(node)
-    self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/ ([\.\?])/,'\1')
+    self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\t+/," ").gsub(/\n{2,}/,"\n\n").gsub(/ ([\.\?])/,'\1')
   end
 
   private
@@ -16,6 +16,7 @@ module Markitdown
     after = nil
     states.unshift node.name.downcase
     pre = prefix(states)
+    strip_contents = false
     case node.name
     when "head"
       return []
@@ -24,11 +25,11 @@ module Markitdown
     when "style"
       return []
     when "div"
-      results << " "
-      after = " "
+      results << "\t"
+      after = "\t"
     when "span"
-      results << " "
-      after = " "
+      results << "\t"
+      after = "\t"
     when "p"
       results << self.newline(pre, nil, 2)
       after = self.newline(pre, nil,  2)
@@ -93,6 +94,7 @@ module Markitdown
     when "a"
       results << " ["
       after = ["](#{node.attributes["href"].value}) "]
+      strip_content = true
     when "img"
       results << " !["
       results << node.attributes["alt"].value if node.attributes["alt"]
@@ -103,7 +105,9 @@ module Markitdown
       results << node.text.strip.gsub("\n","").gsub(/ {2,}/," ")
     end
     node.children.each do |child|
-      results << self.parse_node(child, states)
+      contents = self.parse_node(child, states)
+      contents = contents.flatten.compact.join.strip if strip_content
+      results << contents
     end
     results << after
     states.shift
