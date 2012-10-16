@@ -4,7 +4,7 @@ require File.expand_path('../lib/markitdown/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Christopher Petersen"]
   gem.email         = ["christopher.petersen@gmail.com"]
-  gem.description   = %q{A small library that uses Nokogiri to parse an HTML file and produce Markdown}
+  gem.description   = %q{A library that uses Nokogiri to parse HTML and produce Markdown}
   gem.summary       = %q{Converts HTML to Markdown}
   gem.homepage      = "https://github.com/cpetersen/markitdown"
 
