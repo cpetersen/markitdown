@@ -1,4 +1,4 @@
-# Markitdown
+# Markitdown [![Build Status](https://secure.travis-ci.org/cpetersen/markitdown.png)](http://travis-ci.org/cpetersen/markitdown)
 
 Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nokogiri. It supports:
 
