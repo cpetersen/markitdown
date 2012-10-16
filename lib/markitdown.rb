@@ -2,11 +2,11 @@ require "markitdown/version"
 require "nokogiri"
 
 module Markitdown
-  def self.html_to_markdown(html)
-    node_to_markdown(Nokogiri::XML(html).root)
+  def self.from_html(html)
+    from_nokogiri(Nokogiri::XML(html).root)
   end
 
-  def self.node_to_markdown(node)
+  def self.from_nokogiri(node)
     # gsub(/\n\s+\n/,"\n\n") - remove lines with nothing but space characters
     # gsub(/\n{2,}/,"\n\n") - collapse any series of more an than 2 new lines down to 2
     # gsub(/\t+/," ") - collapse consecutive tabs down to a single space. I use tabs to pad divs and span, this causes multiple nested spans and divs to ultimately be surrounded by a single space.

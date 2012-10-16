@@ -5,7 +5,7 @@ describe Markitdown do
     let(:html) { File.read("spec/doc.html") }
 
     it "should produce valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
 # Main Header
 

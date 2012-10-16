@@ -17,7 +17,7 @@ describe Markitdown do
       </ol>"
     }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
  1. line 1.1
     1. line 2.1
@@ -45,7 +45,7 @@ describe Markitdown do
       </ul>"
     }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
  * line 1.1
    * line 2.1
@@ -73,7 +73,7 @@ describe Markitdown do
       </ul>"
     }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
  * line 1.1
    1. line 2.1
@@ -95,7 +95,7 @@ describe Markitdown do
         </ul>
       </blockquote>" }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == 
+      Markitdown.from_html(html).should == 
 " > This is a quote with a list
  >  * item 1
  >  * item 2
@@ -118,7 +118,7 @@ describe Markitdown do
         </ul>
       </blockquote>" }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == 
+      Markitdown.from_html(html).should == 
 " > This is a quote with a list
  >  * item [1.1](http://www.google.com) 
  >    1. item [2.1](http://www.google.com) 

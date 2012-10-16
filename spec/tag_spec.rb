@@ -5,7 +5,7 @@ describe Markitdown do
     let(:html) { "<p>This is a paragraph</p>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\nThis is a paragraph\n\n"
+      Markitdown.from_html(html).should == "\n\nThis is a paragraph\n\n"
     end
   end
 
@@ -13,7 +13,7 @@ describe Markitdown do
     let(:html) { "<h1>This is a test</h1>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n# This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n# This is a test\n\n"
     end
   end
 
@@ -21,7 +21,7 @@ describe Markitdown do
     let(:html) { "<h2>This is a test</h2>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n## This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n## This is a test\n\n"
     end
   end
 
@@ -29,7 +29,7 @@ describe Markitdown do
     let(:html) { "<h3>This is a test</h3>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n### This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n### This is a test\n\n"
     end
   end
 
@@ -37,7 +37,7 @@ describe Markitdown do
     let(:html) { "<h4>This is a test</h4>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n#### This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n#### This is a test\n\n"
     end
   end
 
@@ -45,7 +45,7 @@ describe Markitdown do
     let(:html) { "<h5>This is a test</h5>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n##### This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n##### This is a test\n\n"
     end
   end
 
@@ -53,7 +53,7 @@ describe Markitdown do
     let(:html) { "<h6>This is a test</h6>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n###### This is a test\n\n"
+      Markitdown.from_html(html).should == "\n\n###### This is a test\n\n"
     end
   end
 
@@ -61,7 +61,7 @@ describe Markitdown do
     let(:html) { "<hr/>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n***\n\n"
+      Markitdown.from_html(html).should == "\n\n***\n\n"
     end
   end
 
@@ -69,7 +69,7 @@ describe Markitdown do
     let(:html) { "<br/>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "\n\n"
+      Markitdown.from_html(html).should == "\n\n"
     end
   end
 
@@ -77,7 +77,7 @@ describe Markitdown do
     let(:html) { "<em>emphasis added</em>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " *emphasis added* "
+      Markitdown.from_html(html).should == " *emphasis added* "
     end
   end
 
@@ -85,7 +85,7 @@ describe Markitdown do
     let(:html) { "<i>italics added</i>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " *italics added* "
+      Markitdown.from_html(html).should == " *italics added* "
     end
   end
 
@@ -93,7 +93,7 @@ describe Markitdown do
     let(:html) { "<strong>strong added</strong>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " **strong added** "
+      Markitdown.from_html(html).should == " **strong added** "
     end
   end
 
@@ -101,7 +101,7 @@ describe Markitdown do
     let(:html) { "<b>bold added</b>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " **bold added** "
+      Markitdown.from_html(html).should == " **bold added** "
     end
   end
 
@@ -109,7 +109,7 @@ describe Markitdown do
     let(:html) { "<html><b>bold added</b>.</html>" }
 
     it "should return valid markdown without a space" do
-      Markitdown.html_to_markdown(html).should == " **bold added**."
+      Markitdown.from_html(html).should == " **bold added**."
     end
   end
 
@@ -117,7 +117,7 @@ describe Markitdown do
     let(:html) { "<html><em>emphasis added</em>?</html>" }
 
     it "should return valid markdown without a space" do
-      Markitdown.html_to_markdown(html).should == " *emphasis added*?"
+      Markitdown.from_html(html).should == " *emphasis added*?"
     end
   end
 
@@ -129,7 +129,7 @@ describe Markitdown do
 </ol>"
     }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
  1. first bullet
  1. second bullet
@@ -146,7 +146,7 @@ describe Markitdown do
 </ul>"
     }
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == "
+      Markitdown.from_html(html).should == "
 
  * first bullet
  * second bullet
@@ -159,7 +159,7 @@ describe Markitdown do
     let(:html) { "<a href='http://www.google.com'>this is a link</strong>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " [this is a link](http://www.google.com) "
+      Markitdown.from_html(html).should == " [this is a link](http://www.google.com) "
     end
   end
 
@@ -167,7 +167,7 @@ describe Markitdown do
     let(:html) { "<img src='https://www.google.com/images/srpr/logo3w.png' alt='Google Logo'>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " ![Google Logo](https://www.google.com/images/srpr/logo3w.png) "
+      Markitdown.from_html(html).should == " ![Google Logo](https://www.google.com/images/srpr/logo3w.png) "
     end
   end
 
@@ -175,7 +175,7 @@ describe Markitdown do
     let(:html) { "<img src='https://www.google.com/images/srpr/logo3w.png'>" }
 
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " ![](https://www.google.com/images/srpr/logo3w.png) "
+      Markitdown.from_html(html).should == " ![](https://www.google.com/images/srpr/logo3w.png) "
     end
   end
 
@@ -183,7 +183,7 @@ describe Markitdown do
     let(:html) { "<style>div.whatever { font-weight: bold; }</style>" }
 
     it "should ignore it" do
-      Markitdown.html_to_markdown(html).should == ""
+      Markitdown.from_html(html).should == ""
     end
   end
 
@@ -191,7 +191,7 @@ describe Markitdown do
     let(:html) { "<blockquote>this is a block quote</blockquote>" }
     
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " > this is a block quote\n"
+      Markitdown.from_html(html).should == " > this is a block quote\n"
     end
   end
 
@@ -203,7 +203,7 @@ describe Markitdown do
     </blockquote>" }
     
     it "should return valid markdown" do
-      Markitdown.html_to_markdown(html).should == " > line 1 line 2 line 3\n"
+      Markitdown.from_html(html).should == " > line 1 line 2 line 3\n"
     end
   end
 end
