@@ -36,7 +36,7 @@ Markitdown.from_html(html)
 ```Markitdown``` uses Nokogiri internally. If you already have a Nokogiri object you can use ```from_nokogiri```
 
 ```ruby
-Markitdown.from_html(nokogiri_node)
+Markitdown.from_nokogiri(nokogiri_node)
 ```
 
 ## Example
