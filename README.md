@@ -30,6 +30,70 @@ Markitdown.from_html(html)
 Markitdown.from_html(nokogiri_node)
 ```
 
+## Example
+
+From the specs:
+
+### HTML
+```html
+<html>
+  <head>
+    <title>Test Document</title>
+  </head>
+  <body>
+    <h1>Main Header</h1>
+    <p>
+      This <em>is</em> a <b>test</b>. It includes a <a href="http://www.google.com">link</a> as well as an image <img src="https://www.google.com/images/srpr/logo3w.png" alt="Google Logo" />
+      <ul>
+        <li>bullet 1</li>
+        <li>bullet 2</li>
+        <li>bullet 3</li>
+      </ul>
+    </p>
+    <hr/>
+    <h2>Subheader</h2>
+    <p>
+      This is paragraph two.
+      <ol>
+        <li>bullet 1</li>
+        <ul>
+          <li>Sub-bullet 1 <a href="http://github.com">Nested link</a>.</li>
+        </ul>
+        <li>bullet 2</li>
+        <li>bullet 3</li>
+      </ol>
+    </p>
+  </body>
+</html>
+```
+
+Gets converted to the following Markdown:
+
+```md
+
+
+# Main Header
+
+This *is* a **test**. It includes a [link](http://www.google.com) as well as an image ![Google Logo](https://www.google.com/images/srpr/logo3w.png) 
+
+ * bullet 1
+ * bullet 2
+ * bullet 3
+
+***
+
+## Subheader
+
+This is paragraph two.
+
+ 1. bullet 1
+    * Sub-bullet 1 [Nested link](http://github.com).
+ 1. bullet 2
+ 1. bullet 3
+
+
+```
+
 ## Contributing
 
 1. Fork it
