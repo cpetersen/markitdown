@@ -1,6 +1,15 @@
 # Markitdown
 
-Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nokogiri.
+Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nokogiri. It supports:
+
+ * Ordered and unordered lists
+ * Nested lists
+ * Blockquotes
+ * Lists (and nested list) inside of block quotes
+ * Images
+ * Links
+
+As well as other tags.
 
 ## Installation
 
