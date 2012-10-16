@@ -1,6 +1,6 @@
 # Markitdown
 
-TODO: Write a gem description
+Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nokogiri.
 
 ## Installation
 
@@ -18,7 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To convert HTML to Markdown:
+
+```ruby
+Markitdown.from_html(html)
+```
+
+```Markitdown``` uses Nokogiri internally. If you already have a Nokogiri object you can use ```from_nokogiri```
+
+```ruby
+Markitdown.from_html(nokogiri_node)
+```
 
 ## Contributing
 
