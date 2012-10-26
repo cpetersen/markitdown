@@ -191,7 +191,7 @@ describe Markitdown do
     let(:html) { "<blockquote>this is a block quote</blockquote>" }
     
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " > this is a block quote\n"
+      Markitdown.from_html(html).should == "\n > this is a block quote\n"
     end
   end
 
@@ -203,7 +203,7 @@ describe Markitdown do
     </blockquote>" }
     
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " > line 1 line 2 line 3\n"
+      Markitdown.from_html(html).should == "\n > line 1 line 2 line 3\n"
     end
   end
 end

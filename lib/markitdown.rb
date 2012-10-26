@@ -80,6 +80,7 @@ module Markitdown
       results << " **"
       after = "** "
     when "blockquote"
+      results << "\n"
       results << pre
       after = "\n"
     when "ol"

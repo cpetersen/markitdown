@@ -26,6 +26,8 @@ This is paragraph two.
  1. bullet 2
  1. bullet 3
 
+This is some free text
+ > And here's a blockquote, right at the end.
 "
     end
   end

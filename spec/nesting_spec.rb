@@ -96,7 +96,8 @@ describe Markitdown do
       </blockquote>" }
     it "should return valid markdown" do
       Markitdown.from_html(html).should == 
-" > This is a quote with a list
+"
+ > This is a quote with a list
  >  * item 1
  >  * item 2
 "
@@ -119,7 +120,8 @@ describe Markitdown do
       </blockquote>" }
     it "should return valid markdown" do
       Markitdown.from_html(html).should == 
-" > This is a quote with a list
+"
+ > This is a quote with a list
  >  * item [1.1](http://www.google.com) 
  >    1. item [2.1](http://www.google.com) 
  >    1. item 2.2
