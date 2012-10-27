@@ -5,31 +5,15 @@ describe Markitdown do
     let(:html) { File.read("spec/doc.html") }
 
     it "should produce valid markdown" do
-      Markitdown.from_html(html).should == "
+      Markitdown.from_html(html).should == File.read("spec/doc.markdown")
+    end
+  end
 
-# Main Header
+  context "When parsing an evernote document" do
+    let(:xml) { File.read("spec/evernote.xml") }
 
-This *is* a **test**. It includes a [link](http://www.google.com) as well as an image ![Google Logo](https://www.google.com/images/srpr/logo3w.png) 
-
- * bullet 1
- * bullet 2
- * bullet 3
-
-***
-
-## Subheader
-
-This is paragraph two.
-
- 1. bullet 1
-    * Sub-bullet 1 [Nested link](http://github.com).
- 1. bullet 2
- 1. bullet 3
-
-This is some free text
-
- > And here's a blockquote, right at the end.
-"
+    it "should produce valid markdown" do
+      Markitdown.from_html(xml).should == File.read("spec/evernote.markdown")
     end
   end
 end
