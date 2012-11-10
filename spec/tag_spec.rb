@@ -156,10 +156,18 @@ describe Markitdown do
   end
 
   context "When parsing a link" do
-    let(:html) { "<a href='http://www.google.com'>this is a link</strong>" }
+    let(:html) { "<a href='http://www.google.com'>this is a link</a>" }
 
     it "should return valid markdown" do
       Markitdown.from_html(html).should == " [this is a link](http://www.google.com) "
+    end
+  end
+
+  context "When parsing a link without an href" do
+    let(:html) { "<a>this is a link</a>" }
+
+    it "should return valid markdown" do
+      Markitdown.from_html(html).should == " [this is a link]() "
     end
   end
 

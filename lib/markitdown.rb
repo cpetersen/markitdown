@@ -98,7 +98,7 @@ module Markitdown
       results << pre
     when "a"
       results << " ["
-      after = ["](#{node.attributes["href"].value}) "]
+      after = ["](#{node.attributes["href"].value if node.attributes["href"]}) "]
       strip_content = true
     when "img"
       results << " !["
