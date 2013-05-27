@@ -20,6 +20,7 @@ module Markitdown
     after = nil
     states.unshift node.name.downcase
     pre = prefix(states)
+    recurse = true
     strip_contents = false
     case node.name
     when "head"
@@ -82,7 +83,7 @@ module Markitdown
     when "blockquote"
       results << "\n\n"
       results << pre
-      after = "\n"
+      after = "\n\n"
     when "ol"
       unless self.nested_list?(states)
         results << self.newline(pre, nil)
@@ -108,11 +109,16 @@ module Markitdown
       results << ") "
     when "text"
       results << node.text.strip.gsub("\n","").gsub(/ {2,}/," ")
+    when "code"
+      results << " `#{node.text}` "
+      recurse = false
     end
-    node.children.each do |child|
-      contents = self.parse_node(child, states)
-      contents = contents.flatten.compact.join.strip if strip_content
-      results << contents
+    if recurse
+      node.children.each do |child|
+        contents = self.parse_node(child, states)
+        contents = contents.flatten.compact.join.strip if strip_content
+        results << contents
+      end
     end
     results << after
     states.shift

@@ -22,3 +22,12 @@ This is paragraph two.
 This is some free text
 
  > And here's a blockquote, right at the end.
+
+This is some more free text `
+      This
+      is
+      a
+      block
+      of
+      code
+    ` 

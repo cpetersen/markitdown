@@ -101,6 +101,7 @@ describe Markitdown do
  > This is a quote with a list
  >  * item 1
  >  * item 2
+
 "
     end
   end
@@ -128,6 +129,7 @@ describe Markitdown do
  >    1. item [2.1](http://www.google.com) 
  >    1. item 2.2
  >  * item 1.2
+
 "
     end
   end
