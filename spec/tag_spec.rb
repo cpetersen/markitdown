@@ -155,6 +155,30 @@ describe Markitdown do
     end
   end
 
+  context "When parsing a DL" do
+    let(:html) { "<dl>
+  <dt>first term</dt>
+  <dd>first definition</dd>
+  <dt>second term</dt>
+  <dd>second definition</dd>
+  <dt>third term</dt>
+  <dd>third definition</dd>
+</ol>"
+    }
+    it "should return valid markdown" do
+      Markitdown.from_html(html).should == "
+
+first term
+ : first definition
+second term
+ : second definition
+third term
+ : third definition
+
+"
+    end
+  end
+
   context "When parsing a link" do
     let(:html) { "<a href='http://www.google.com'>this is a link</a>" }
 

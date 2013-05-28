@@ -97,6 +97,18 @@ module Markitdown
     when "li"
       results << "\n"
       results << pre
+    when "dl"
+      unless self.nested_list?(states)
+        results << self.newline(pre, nil)
+        after = "\n\n"
+      end
+    when "dt"
+      results << "\n"
+      results << pre
+    when "dd"
+      results << "\n"
+      results << pre
+      results << " : "
     when "a"
       results << " ["
       after = ["](#{node.attributes["href"].value if node.attributes["href"]}) "]

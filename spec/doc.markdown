@@ -32,3 +32,11 @@ This is some more free text
           of
           code
 
+This is a definition list
+
+simple
+ : This is a simple term and a simple definition
+complicated term
+ : This is a complicated term with a multi-line definition
+ : The **second definition** has a some **bold** terms
+
