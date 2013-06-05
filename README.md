@@ -8,6 +8,8 @@ Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nok
  * Lists (and nested list) inside of block quotes
  * Images
  * Links
+ * Code (inline and blocks)
+ * Definition lists
 
 As well as other tags.
 
