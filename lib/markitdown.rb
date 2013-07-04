@@ -69,8 +69,9 @@ module Markitdown
     when "br"
       results << self.newline(pre, nil,  2)
     when "em"
-      results << " *"
-      after = "* "
+      # strip_content = true
+      results << " _"
+      after = "_ "
     when "i"
       results << " *"
       after = "* "

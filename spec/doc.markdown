@@ -2,7 +2,7 @@
 
 # Main Header
 
-This *is* a **test**. It includes a [link](http://www.google.com) as well as an image ![Google Logo](https://www.google.com/images/srpr/logo3w.png) 
+This _is_ a **test**. It includes a [link](http://www.google.com) as well as an image ![Google Logo](https://www.google.com/images/srpr/logo3w.png) 
 
  * bullet 1
  * bullet 2

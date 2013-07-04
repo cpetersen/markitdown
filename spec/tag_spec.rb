@@ -77,7 +77,7 @@ describe Markitdown do
     let(:html) { "<em>emphasis added</em>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " *emphasis added* "
+      Markitdown.from_html(html).should == " _emphasis added_ "
     end
   end
 
@@ -117,7 +117,7 @@ describe Markitdown do
     let(:html) { "<html><em>emphasis added</em>?</html>" }
 
     it "should return valid markdown without a space" do
-      Markitdown.from_html(html).should == " *emphasis added*?"
+      Markitdown.from_html(html).should == " _emphasis added_?"
     end
   end
 
