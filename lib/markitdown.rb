@@ -78,10 +78,10 @@ module Markitdown
       after = "END_TAG(_) "
     when "strong"
       results << " **"
-      after = "** "
+      after = "END_TAG(**) "
     when "b"
       results << " **"
-      after = "** "
+      after = "END_TAG(**) "
     when "blockquote"
       results << "\n\n"
       results << pre
