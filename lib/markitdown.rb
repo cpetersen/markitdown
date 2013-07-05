@@ -1,3 +1,5 @@
+# encoding=utf-8 
+
 require "markitdown/version"
 require "nokogiri"
 
@@ -11,7 +13,7 @@ module Markitdown
     # gsub(/\n{2,}/,"\n\n") - collapse any series of more an than 2 new lines down to 2
     # gsub(/\t+/," ") - collapse consecutive tabs down to a single space. I use tabs to pad divs and span, this causes multiple nested spans and divs to ultimately be surrounded by a single space.
     # gsub(/ ([\.\?])/,'\1') - removes a space before a period or question mark. Things like links get surrounded by spaces. If they appear at the end of a sentence, this makes sure the punctation isn't off.
-    self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1')
+    self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
   end
 
   private
@@ -69,12 +71,11 @@ module Markitdown
     when "br"
       results << self.newline(pre, nil,  2)
     when "em"
-      # strip_content = true
       results << " _"
-      after = "_ "
+      after = "END_TAG(_) "
     when "i"
-      results << " *"
-      after = "* "
+      results << " _"
+      after = "END_TAG(_) "
     when "strong"
       results << " **"
       after = "** "
@@ -137,7 +138,14 @@ module Markitdown
         results << contents
       end
     end
-    results << after
+    if strip_content
+      last_tags = results.pop
+      after = after.flatten.compact.join if after.is_a?(Array)
+      last_tags = "#{last_tags}#{after}"
+      results << last_tags
+    else
+      results << after
+    end
     states.shift
     results
   end

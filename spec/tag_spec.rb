@@ -85,7 +85,7 @@ describe Markitdown do
     let(:html) { "<i>italics added</i>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " *italics added* "
+      Markitdown.from_html(html).should == " _italics added_ "
     end
   end
 

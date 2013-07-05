@@ -9,6 +9,14 @@ describe Markitdown do
     end
   end
 
+  context "When parsing the document 'asmartbear'" do
+    let(:html) { File.read("spec/asmartbear.html") }
+
+    it "should produce valid markdown" do
+      Markitdown.from_html(html).should == File.read("spec/asmartbear.markdown")
+    end
+  end
+
   context "When parsing an evernote document" do
     let(:xml) { File.read("spec/evernote.xml") }
 
