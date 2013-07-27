@@ -130,7 +130,25 @@ module Markitdown
         results << " `#{node.text}` "
       end
       recurse = false
+    when "table"
+      results << "\n\n"
+      after = "\n\n"
+    when "th"
+      results << "|"
+    when "td"
+      results << "|"
+    when "tr"
+      after = "|\n"
+      table = find_parent(node.parent, "table")
+      if table
+        first_row = table.xpath("//tr").first
+        if first_row == node
+          cell_count = node.xpath("//th|td").count
+          after << ("|---"*cell_count) + "|\n"
+        end
+      end
     end
+
     if recurse
       node.children.each do |child|
         contents = self.parse_node(child, states)
@@ -138,6 +156,7 @@ module Markitdown
         results << contents
       end
     end
+    
     if strip_content
       last_tags = results.pop
       after = after.flatten.compact.join if after.is_a?(Array)
@@ -194,5 +213,11 @@ module Markitdown
       end
     end
     result
+  end
+
+  def self.find_parent(node, tag_name)
+    return nil unless node
+    return node if node.name == tag_name
+    find_parent(node.parent, tag_name)
   end
 end
