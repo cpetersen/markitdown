@@ -23,7 +23,8 @@ module Markitdown
     states.unshift node.name.downcase
     pre = prefix(states)
     recurse = true
-    strip_contents = false
+    strip_content = false
+    flatten_content = false
     case node.name
     when "head"
       return []
@@ -135,8 +136,10 @@ module Markitdown
       after = "\n\n"
     when "th"
       results << "|"
+      flatten_content = true
     when "td"
       results << "|"
+      flatten_content = true
     when "tr"
       after = "|\n"
       table = find_parent(node.parent, "table")
@@ -153,6 +156,7 @@ module Markitdown
       node.children.each do |child|
         contents = self.parse_node(child, states)
         contents = contents.flatten.compact.join.strip if strip_content
+        contents = contents.flatten.compact.join.gsub("\n", " ") if flatten_content
         results << contents
       end
     end
