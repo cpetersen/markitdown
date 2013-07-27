@@ -136,17 +136,19 @@ module Markitdown
       after = "\n\n"
     when "th"
       results << "|"
+      strip_content = true
       flatten_content = true
     when "td"
       results << "|"
+      strip_content = true
       flatten_content = true
     when "tr"
       after = "|\n"
       table = find_parent(node.parent, "table")
       if table
-        first_row = table.xpath("//tr").first
+        first_row = table.xpath(".//tr").first
         if first_row == node
-          cell_count = node.xpath("//th|td").count
+          cell_count = node.xpath(".//th|td").count
           after << ("|---"*cell_count) + "|\n"
         end
       end
@@ -156,7 +158,7 @@ module Markitdown
       node.children.each do |child|
         contents = self.parse_node(child, states)
         contents = contents.flatten.compact.join.strip if strip_content
-        contents = contents.flatten.compact.join.gsub("\n", " ") if flatten_content
+        contents = [contents].flatten.compact.join.gsub("\n", " ") if flatten_content
         results << contents
       end
     end
