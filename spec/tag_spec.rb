@@ -129,6 +129,14 @@ describe Markitdown do
     end
   end
 
+  context "When parsing an strikethrough element that's followed by a punctuation" do
+    let(:html) { "<html><strike>strikethrough added</strike>.</html>" }
+
+    it "should return valid markdown without a space" do
+      Markitdown.from_html(html).should == " ~~strikethrough added~~."
+    end
+  end
+
   context "When parsing an OL" do
     let(:html) { "<ol>
   <li>first bullet</li>
