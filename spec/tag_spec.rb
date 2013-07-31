@@ -145,6 +145,23 @@ describe Markitdown do
     end
   end
 
+  context "When parsing a superscript element with no spaces" do
+    let(:html) { "<html>2<sup>nd</sup>.</html>" }
+
+    it "should return valid markdown without spaces" do
+      Markitdown.from_html(html).should == "2^(nd)."
+    end
+  end
+
+  context "When parsing a superscript element with spaces" do
+    let(:html) { "<html>This <sup>is a</sup> test</html>" }
+
+    it "should return valid markdown with spaces" do
+      pending "Still need to figure out leading spaces for <sup> elements"
+      Markitdown.from_html(html).should == "This ^(is a) test"
+    end
+  end
+
   context "When parsing an OL" do
     let(:html) { "<ol>
   <li>first bullet</li>
