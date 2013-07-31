@@ -77,7 +77,7 @@ describe Markitdown do
     let(:html) { "<em>emphasis added</em>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " _emphasis added_ "
+      Markitdown.from_html(html).should == " *emphasis added* "
     end
   end
 
@@ -85,7 +85,7 @@ describe Markitdown do
     let(:html) { "<i>italics added</i>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " _italics added_ "
+      Markitdown.from_html(html).should == " *italics added* "
     end
   end
 
@@ -93,7 +93,7 @@ describe Markitdown do
     let(:html) { "<strong>strong added</strong>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " **strong added** "
+      Markitdown.from_html(html).should == " __strong added__ "
     end
   end
 
@@ -101,7 +101,7 @@ describe Markitdown do
     let(:html) { "<b>bold added</b>" }
 
     it "should return valid markdown" do
-      Markitdown.from_html(html).should == " **bold added** "
+      Markitdown.from_html(html).should == " __bold added__ "
     end
   end
 
@@ -109,7 +109,7 @@ describe Markitdown do
     let(:html) { "<html><b>bold added</b>.</html>" }
 
     it "should return valid markdown without a space" do
-      Markitdown.from_html(html).should == " **bold added**."
+      Markitdown.from_html(html).should == " __bold added__."
     end
   end
 
@@ -117,7 +117,7 @@ describe Markitdown do
     let(:html) { "<html><em>emphasis added</em>?</html>" }
 
     it "should return valid markdown without a space" do
-      Markitdown.from_html(html).should == " _emphasis added_?"
+      Markitdown.from_html(html).should == " *emphasis added*?"
     end
   end
 

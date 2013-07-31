@@ -2,7 +2,7 @@
 
  > 
  > 
- >  Try to avoid using vague words like "one" or "it" to describe an issue. For example: _"When I opened the document, the content was askew. When I tried to print the document, the printer jammed up. **It** cannot blow up like that!"_  In the last sentence of this example, are you complaining about the document or the printer? It's not really clear. So I would repeat myself even at the risk of sounding redundant. It's better to be redundant and clear than to leave the other person wondering. 
+ >  Try to avoid using vague words like "one" or "it" to describe an issue. For example: *"When I opened the document, the content was askew. When I tried to print the document, the printer jammed up. __It__ cannot blow up like that!"*  In the last sentence of this example, are you complaining about the document or the printer? It's not really clear. So I would repeat myself even at the risk of sounding redundant. It's better to be redundant and clear than to leave the other person wondering. 
  > 
  >  
  > 
