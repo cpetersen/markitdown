@@ -121,6 +121,14 @@ describe Markitdown do
     end
   end
 
+  context "When parsing an underlined element that's followed by a punctuation" do
+    let(:html) { "<html><u>underline added</u>.</html>" }
+
+    it "should return valid markdown without a space" do
+      Markitdown.from_html(html).should == " _underline added_."
+    end
+  end
+
   context "When parsing an OL" do
     let(:html) { "<ol>
   <li>first bullet</li>
