@@ -89,6 +89,9 @@ module Markitdown
     when "strike"
       results << " ~~"
       after = "END_TAG(~~) "
+    when "mark"
+      results << " =="
+      after = "END_TAG(==) "
     when "blockquote"
       results << "\n\n"
       results << pre

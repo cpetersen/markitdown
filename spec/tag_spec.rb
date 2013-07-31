@@ -137,6 +137,14 @@ describe Markitdown do
     end
   end
 
+  context "When parsing an highlight element that's followed by a punctuation" do
+    let(:html) { "<html><mark>highlight added</mark>.</html>" }
+
+    it "should return valid markdown without a space" do
+      Markitdown.from_html(html).should == " ==highlight added==."
+    end
+  end
+
   context "When parsing an OL" do
     let(:html) { "<ol>
   <li>first bullet</li>
