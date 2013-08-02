@@ -12,7 +12,7 @@ Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nok
  * Definition lists
  * Tables
  * Underlines
- * Strikethroughs (strike tag)
+ * Strikethroughs (strike or del tags)
  * Highlights (mark tag)
  * Superscripts (sup tag)
 
