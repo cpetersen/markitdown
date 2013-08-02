@@ -137,6 +137,14 @@ describe Markitdown do
     end
   end
 
+  context "When parsing an delete element that's followed by a punctuation" do
+    let(:html) { "<html><del>delete added</del>.</html>" }
+
+    it "should return valid markdown without a space" do
+      Markitdown.from_html(html).should == " ~~delete added~~."
+    end
+  end
+
   context "When parsing an highlight element that's followed by a punctuation" do
     let(:html) { "<html><mark>highlight added</mark>.</html>" }
 
