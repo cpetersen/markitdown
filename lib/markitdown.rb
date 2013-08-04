@@ -141,7 +141,7 @@ module Markitdown
       results << node.text.strip.gsub("\n","").gsub(/ {2,}/," ")
     when "code"
       if node.text.include?("\n")
-        results << "\n\n    #{node.text.gsub("\n","\n    ")}\n\n"
+        results << "\n\n```\n#{node.text.gsub(/^\n/,"").gsub(/\n\s*$/,"")}\n```\n\n"
       else
         results << " `#{node.text}` "
       end

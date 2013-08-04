@@ -25,12 +25,14 @@ This is some free text
 
 This is some more free text
 
-          This
-          is
-          a
-          block
-          of
-          code
+```
+      This
+      is
+      a
+      block
+      of
+      code
+```
 
 This is a definition list
 
