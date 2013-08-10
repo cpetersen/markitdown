@@ -167,7 +167,7 @@ describe Markitdown do
 
     it "should return valid markdown with spaces" do
       pending "Still need to figure out leading spaces for <sup> elements"
-      Markitdown.from_html(html).should == "This ^(is a) test"
+      # Markitdown.from_html(html).should == "This ^(is a) test"
     end
   end
 
