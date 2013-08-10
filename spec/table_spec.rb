@@ -1,4 +1,5 @@
 require 'markitdown'
+require 'spec_helper'
 
 describe Markitdown do  
   context "When parsing a table with a thead and tbody" do
