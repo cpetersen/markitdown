@@ -177,7 +177,7 @@ module Markitdown
 
     if recurse
       node.children.each do |child|
-        contents = self.parse_node(child, states)
+        contents = self.parse_node(child, states, guess_language)
         contents = contents.flatten.compact.join.strip if strip_content
         contents = [contents].flatten.compact.join.gsub("\n", " ") if flatten_content
         results << contents
