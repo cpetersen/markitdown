@@ -4,20 +4,20 @@ require "markitdown/version"
 require "nokogiri"
 
 module Markitdown
-  def self.from_html(html)
-    from_nokogiri(Nokogiri::XML(html).root)
+  def self.from_html(html, guess_language=false)
+    from_nokogiri(Nokogiri::XML(html).root, guess_language)
   end
 
-  def self.from_nokogiri(node)
+  def self.from_nokogiri(node, guess_language=false)
     # gsub(/\n\s+\n/,"\n\n") - remove lines with nothing but space characters
     # gsub(/\n{2,}/,"\n\n") - collapse any series of more an than 2 new lines down to 2
     # gsub(/\t+/," ") - collapse consecutive tabs down to a single space. I use tabs to pad divs and span, this causes multiple nested spans and divs to ultimately be surrounded by a single space.
     # gsub(/ ([\.\?])/,'\1') - removes a space before a period or question mark. Things like links get surrounded by spaces. If they appear at the end of a sentence, this makes sure the punctation isn't off.
-    self.parse_node(node).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
+    self.parse_node(node, [], guess_language).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
   end
 
   private
-  def self.parse_node(node, states=[])
+  def self.parse_node(node, states=[], guess_language=false)
     results=[]
     after = nil
     states.unshift node.name.downcase
@@ -141,7 +141,13 @@ module Markitdown
       results << node.text.strip.gsub("\n","").gsub(/ {2,}/," ")
     when "code"
       if node.text.include?("\n")
-        results << "\n\n```\n#{node.text.gsub(/^\n/,"").gsub(/\n\s*$/,"")}\n```\n\n"
+        text = node.text.gsub(/^\n/,"").gsub(/\n\s*$/,"")
+        if guess_language && Object.const_defined?('Linguist')
+          language = Linguist::Language.detect("codeblock", text)
+          results << "\n\n```#{language}\n#{text}\n```\n\n"
+        else          
+          results << "\n\n```\n#{text}\n```\n\n"
+        end
       else
         results << " `#{node.text}` "
       end
