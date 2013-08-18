@@ -4,20 +4,20 @@ require "markitdown/version"
 require "nokogiri"
 
 module Markitdown
-  def self.from_html(html, guess_language=false)
-    from_nokogiri(Nokogiri::XML(html).root, guess_language)
+  def self.from_html(html, language_classifier=nil)
+    from_nokogiri(Nokogiri::XML(html).root, language_classifier)
   end
 
-  def self.from_nokogiri(node, guess_language=false)
+  def self.from_nokogiri(node, language_classifier=nil)
     # gsub(/\n\s+\n/,"\n\n") - remove lines with nothing but space characters
     # gsub(/\n{2,}/,"\n\n") - collapse any series of more an than 2 new lines down to 2
     # gsub(/\t+/," ") - collapse consecutive tabs down to a single space. I use tabs to pad divs and span, this causes multiple nested spans and divs to ultimately be surrounded by a single space.
     # gsub(/ ([\.\?])/,'\1') - removes a space before a period or question mark. Things like links get surrounded by spaces. If they appear at the end of a sentence, this makes sure the punctation isn't off.
-    self.parse_node(node, [], guess_language).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
+    self.parse_node(node, [], language_classifier).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
   end
 
   private
-  def self.parse_node(node, states=[], guess_language=false)
+  def self.parse_node(node, states=[], language_classifier=nil)
     results=[]
     after = nil
     states.unshift node.name.downcase
@@ -142,8 +142,8 @@ module Markitdown
     when "code"
       if node.text.include?("\n")
         text = node.text.gsub(/^\n/,"").gsub(/\n\s*$/,"")
-        if guess_language && Object.const_defined?('Linguist')
-          language = Linguist::Language.detect("codeblock", text)
+        if language_classifier
+          language = language_classifier.classify(text)
           results << "\n\n```#{language}\n#{text}\n```\n\n"
         else          
           results << "\n\n```\n#{text}\n```\n\n"
@@ -177,7 +177,7 @@ module Markitdown
 
     if recurse
       node.children.each do |child|
-        contents = self.parse_node(child, states, guess_language)
+        contents = self.parse_node(child, states, language_classifier)
         contents = contents.flatten.compact.join.strip if strip_content
         contents = [contents].flatten.compact.join.gsub("\n", " ") if flatten_content
         results << contents

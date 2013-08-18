@@ -15,9 +15,10 @@ describe Markitdown do
 
     context "and guessing the language" do
       let(:markdown) { File.read("spec/code_with_language.markdown") }
-      
+      let(:classifier) { TestLanguageClassifier.new }
+
       it "should produce valid markdown" do
-        Markitdown.from_html(html, true).should == markdown
+        Markitdown.from_html(html, classifier).should == markdown
       end
     end
   end
