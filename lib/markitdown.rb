@@ -13,7 +13,7 @@ module Markitdown
     # gsub(/\n{2,}/,"\n\n") - collapse any series of more an than 2 new lines down to 2
     # gsub(/\t+/," ") - collapse consecutive tabs down to a single space. I use tabs to pad divs and span, this causes multiple nested spans and divs to ultimately be surrounded by a single space.
     # gsub(/ ([\.\?])/,'\1') - removes a space before a period or question mark. Things like links get surrounded by spaces. If they appear at the end of a sentence, this makes sure the punctation isn't off.
-    self.parse_node(node, [], language_classifier).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1")
+    self.parse_node(node, [], language_classifier).flatten.compact.join.gsub(/\n\s+\n/,"\n\n").gsub(/\n{2,}/,"\n\n").gsub(/( > \n){2,}/,"\n > \n > ").gsub(/\t+/," ").gsub(/ ([\.\?])/,'\1').gsub(/\s*END_TAG\((.{1,3})\)/, "\\1").gsub(" ", " ")
   end
 
   private

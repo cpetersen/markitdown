@@ -22,4 +22,13 @@ describe Markitdown do
       end
     end
   end
+
+  context "When parsing codeblocks that contain nbsp" do
+    let(:html) { File.read("spec/code_with_nbsp.html") }
+    let(:markdown) { File.read("spec/code_with_nbsp.markdown") }
+
+    it "should produce valid markdown" do
+      Markitdown.from_html(html).should == markdown
+    end
+  end
 end
