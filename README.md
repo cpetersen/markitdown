@@ -1,4 +1,4 @@
-# Markitdown [![Build Status](https://secure.travis-ci.org/cpetersen/markitdown.png)](http://travis-ci.org/cpetersen/markitdown) [![Coverage Status](https://coveralls.io/repos/cpetersen/markitdown/badge.png?branch=master)](https://coveralls.io/r/cpetersen/markitdown?branch=master)
+# Markitdown [![Build Status](https://secure.travis-ci.org/cpetersen/markitdown.png)](http://travis-ci.org/cpetersen/markitdown) [![Coverage Status](https://coveralls.io/repos/cpetersen/markitdown/badge.png?branch=master)](https://coveralls.io/r/cpetersen/markitdown?branch=master) [![Gem Version](https://badge.fury.io/rb/markitdown.png)](http://badge.fury.io/rb/markitdown)
 
 Markitdown is a Ruby library that converts HTML to Markdown. It's powered by Nokogiri. It supports:
 
