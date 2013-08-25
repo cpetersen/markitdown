@@ -2,11 +2,14 @@
 require File.expand_path('../lib/markitdown/version', __FILE__)
 
 Gem::Specification.new do |gem|
+  gem.name          = "Markitdown"
+  gem.version       = Markitdown::VERSION
   gem.authors       = ["Christopher Petersen"]
-  gem.email         = ["christopher.petersen@gmail.com"]
+  gem.email         = ["chris@petersen.io"]
   gem.description   = %q{A library that uses Nokogiri to parse HTML and produce Markdown}
   gem.summary       = %q{Converts HTML to Markdown}
   gem.homepage      = "https://github.com/cpetersen/markitdown"
+  gem.license       = 'MIT'
 
   gem.add_dependency('nokogiri')
   gem.add_development_dependency('rake')
@@ -18,5 +21,4 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "markitdown"
   gem.require_paths = ["lib"]
-  gem.version       = Markitdown::VERSION
 end
